@@ -10,13 +10,6 @@ CategoryID = 876410471115272253
 async def on_ready():       #bot has logged in and has set things up 
     print('We have logged in as {0.user}'.format(client))
 
-#@client.event               
-#async def on_message(message):          #bot reads message 
-#    if message.author == client.user:    # bot should not respond to messages from itself
-#        return
-#
-#    if message.content.startswith('$hello'):            #bot command
-#        await message.channel.send('Hello!')            #bot response
 
 @client.event
 async def on_message(message):
