@@ -1,5 +1,4 @@
 import discord
-from urllib import request
 import logging
 import asyncio
 
