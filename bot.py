@@ -16,22 +16,18 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    else:
+    if message.content.startswith("!send"):
 
-        if message.content.startswith("!send"):
+        attachments = [attachment.url for attachment in message.attachments]
 
-            messageContent = message.content
+        tasks = [
+            asyncio.create_task(channel.send(f"{message.content} {' '.join(attachments)}"))
+            for channel in message.guild.text_channels
+            if channel.category.id == CategoryID
+        ]
 
-            tasks = []
-
-            for channel in message.guild.text_channels:
-                print("Sending something!")
-                print(messageContent)
-                if channel.category.id == CategoryID:
-                    tasks.append(asyncio.create_task(channel.send(messageContent)))
-
-            for task in tasks:
-                await task
+        for task in tasks:
+            await task
 
 
 client.run("ODc2MzM2NjUyOTEyNTcwMzY5.YRimGw.tscmdX65C9t0jnpKdtGGe1tqT6Y")
