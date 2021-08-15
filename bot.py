@@ -1,7 +1,10 @@
 import discord
+from urllib import request
 import logging
 
 client = discord.Client()
+CategoryID = 876410471115272253
+
 
 @client.event
 async def on_ready():       #bot has logged in and has set things up 
@@ -21,9 +24,16 @@ async def on_message(message):
         return
 
     else:
-        messageContent = message.content
-        for channel in message.guild.text_channels:
-            await channel.send(messageContent)
+
+        if(message.content.startswith('!send')):
+
+            messageContent = message.content
+        
+            for channel in message.guild.text_channels:
+                print('Sending something!')
+                print(messageContent)
+                if(channel.category.id == CategoryID):
+                    await channel.send(messageContent)
 
         
 
